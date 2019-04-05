@@ -1,7 +1,7 @@
 ---
 title: mongoDB
 created: '2019-04-04T07:34:07.975Z'
-modified: '2019-04-04T08:48:22.882Z'
+modified: '2019-04-05T08:20:24.874Z'
 ---
 
 # mongoDB
@@ -86,13 +86,11 @@ De plus, comme aucun contrôle de cohérence n’est fait lorsque de la donnée 
 ### Initialiser mongoose
 ```
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nodekb', {useNewUrlParser: true}); //nodekb est le nom de notre BDD
-let db = mongoose.connection;
-/* Check connection */
-db.once('open', () => console.log('Connected to MongoDB'));
-
-/* Check for DB errors */
-db.on('error', (err) => console.log(err));
+mongoose
+  .connect('mongodb://localhost/nodekb', 
+  {useNewUrlParser: true}); //nodekb est le nom de notre BDD
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 ```
 ### Créer un model
 Les modèles permettent:

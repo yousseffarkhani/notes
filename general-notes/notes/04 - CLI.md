@@ -39,11 +39,19 @@ Curl permet d’interroger un serveur via la CLI comme le ferait un navigateur.
 - `rm / rmdir / rm -r` (si le dir n’est pas vide) : supprimer
 - `touch` : Créer un fichier
 - `sleep 1` : met en pause le processus pendant 1 sec
+- `Ctrl + L` : Permet de clean la fenêtre
 
 #### File permissions
 - `chmod` : change les permissions (w : 4, r : 2, x : 1)
 - `chown` : change le propriétaire
 - `chgrp` : change le groupe
+
+#### Package manager
+- `apt update` : Met à jour la liste des packages
+- `apt upgrade` : Met à jour les softwares
+- `apt install apache` : Installer un package
+
+
 
 #### chaining commands : voir https://speakerdeck.com/62gerente/bash-introduction
 - `ctrl + a/e` : Se placer en début / fin de ligne

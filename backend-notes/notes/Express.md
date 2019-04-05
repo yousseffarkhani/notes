@@ -1,7 +1,7 @@
 ---
 title: Express
 created: '2019-04-04T09:42:52.038Z'
-modified: '2019-04-04T10:30:04.397Z'
+modified: '2019-04-04T14:57:18.515Z'
 ---
 
 # Express
@@ -49,6 +49,7 @@ app.listen(3000);
 - `/views`: contient des templates
 - `package.json`
 - `/www`: script de démarrage
+- `config`: contient les éléments de configuration (adresse de la DB, MDP, ...)
 
 /!\ On différencie les web applications nécessitant du server-side-rendering et les REST APIs avec un serveur de données (le rendering a lieu en front directement chez le client).
 #### Structure de `app.js` (fichier principal):
