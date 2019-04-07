@@ -39,7 +39,7 @@ Les components et services seront registered/déclarés dans un module.
   - Pour packager un code de prod, saisir : `ng build –prod`
   - Ouvrir un serveur virtuel : `http-server -o`
 ## Manipuler de la donnée
-![Icon](@attachment/databinding.png)
+![Icon](./attachments/databinding.png)
 Le databinding représente la communication entre le code TS et le template HTML.
 L’interpolation et le property binding permettent de transmettre des informations du code TS vers le HTML.
 ### Interpolation binding

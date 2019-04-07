@@ -28,6 +28,7 @@ Il existe 3 environnements :
 #### Déployer sur github
 1. `git remote add origin repo’s SSH URL` 
 1. `git push -u origin master`
+- Retirer un repo de la liste `git remote rm origin`
 #### Processus standard
 1. `git add nom du fichier`
 1. `git commit -m "commentaire"`
@@ -89,8 +90,12 @@ Processus :
             2. `git merge upstream/master`
 1. Push la dernière version sur origin
 1. Réaliser un pull request
-![Github](@attachment/github.png) 
+![Github](./attachments/github.png) 
     
+## Publier un site sur Github Pages
+1. Créer un repo avec le nom d'utilisateur.github.io (yousseffarkhani.github.io)
+1. Cloner le repo local sur origin
+1. Aller à yousseffarkhani.github.io
 ## Ressources
 Bien rédiger ses commits : https://chris.beams.io/posts/git-commit/
 ## Pour approfondir

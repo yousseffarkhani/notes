@@ -19,3 +19,5 @@ Avec les SPA cependant, le serveur envoie l'ensemble des fichiers nécessaires p
 Architecture : 
 - Home / About / Pricing / ... : SSR (website.com)
 - Application : SPA (app.website.com)
+
+![](./attachments/SPA_&_SSR_lifecycles.png)

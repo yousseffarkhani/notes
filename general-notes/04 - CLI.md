@@ -15,6 +15,7 @@ tags: [Linux]
 Curl permet d’interroger un serveur via la CLI comme le ferait un navigateur.
 - `curl ‘url’ -i` → i permet d’ajouter les informations sur le header dans la réponse affichée dans la CLI.
 - `curl ‘url’ -X POST -d ‘donnée’ -H ‘Content-type: application/json’` → -d permet d’ajouter de la donnée dans le corps de la requête
+Exemple : `curl -X POST localhost:9000/getUsers -d '{"name":"Youssef"}' -H 'Content-type: application/json'`
 - `curl ‘url’ -X PUT -d ‘donnée’ -H ‘Content-type: application/json’` → -H permet de définir des éléments du header
 - `curl ‘url’ -X DELETE` → -X permet de définir la méthode HTTP
 #### Ouvrir des programmes

@@ -12,7 +12,7 @@ Docker permet de lancer des softwares/applications dans des containers.
 Cela peut aller de nginx (serveur web) à mongoDB, mySQL, DRUPAL, ...
 Docker enveloppe l'application et ses dépendances dans une unité incluant le code, runtime, librairies.
 ### Comparaison Docker vs VM
-![](@attachment/dockervmware.png)
+![](./attachments/dockervmware.png)
 #### Docker :
 ##### Avantages :
 - Facile à déployer, il suffit de packager une image et de créer un container

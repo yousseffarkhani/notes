@@ -24,6 +24,7 @@ Italique : *italique*
 ## Unordered list
 - list 1
 - list 2
+  - list 3
 
 :joy:
 
@@ -31,14 +32,16 @@ Italique : *italique*
 
 - <kbd>Cmd+N</kbd> - New.
 
-[Shortcuts](@note/07 - Shortcuts.md)
-[](@note/07 - Shortcuts.md)
+[test](http://www.test.com)
+
+[Shortcuts](./note/07 - Shortcuts.md)
+[](./note/07 - Shortcuts.md)
 [[Importing|08 - Importing.md]]
 [[08 - Importing]]
 
-![Icon](@attachment/icon_small.png)
-[Icon](@attachment/icon_small.png)
-[](@attachment/icon_small.png)
+![Icon](./attachment/icon_small.png)
+[Icon](./attachment/icon_small.png)
+[](./attachment/icon_small.png)
 
 ```mermaid
 graph LR
