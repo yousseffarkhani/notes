@@ -13,11 +13,19 @@ tags: [Linux]
 1. Saisir `sh ‘nom du fichier script’`
 #### Network
 Curl permet d’interroger un serveur via la CLI comme le ferait un navigateur.
+##### HTTP: 
 - `curl ‘url’ -i` → i permet d’ajouter les informations sur le header dans la réponse affichée dans la CLI.
 - `curl ‘url’ -X POST -d ‘donnée’ -H ‘Content-type: application/json’` → -d permet d’ajouter de la donnée dans le corps de la requête
 Exemple : `curl -X POST localhost:9000/getUsers -d '{"name":"Youssef"}' -H 'Content-type: application/json'`
 - `curl ‘url’ -X PUT -d ‘donnée’ -H ‘Content-type: application/json’` → -H permet de définir des éléments du header
 - `curl ‘url’ -X DELETE` → -X permet de définir la méthode HTTP
+- `curl -o test.txt URL`: permet d'envoyer la sortie dans un fichier (utile en cas d'appel d'API Rest)
+- (Alternative) `curl -O URL`: Crée automatiquement un fichier avec le contenu de l'URL.
+- `curl -u login:password URL`: Permet d'envoyer ses logins à une API sécurisée.
+- `curl -L http://google.com`: Permet de suivre le lien de redirection (ici vers http://wwww.google.com).
+##### FTP:
+- `curl -u test1@traversymedia.com:password -T test.txt ftp://ftp.traversymedia.com`: Permet d'envoyer le fichier test.txt vers un serveur FTP (dans le dossier test1).
+- `curl -u test1@traversymedia.com:password -O ftp://ftp.traversymedia.com/hello.txt`: Permet de télécharger le fichier hello.txt du serveur FTP.
 #### Ouvrir des programmes
 - VSCode : `code "nom du fichier"`
 - libreoffice : `libreoffice "nom du fichier"`
