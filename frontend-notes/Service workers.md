@@ -31,7 +31,7 @@ Il existe une librairie pour la gestion des SW : workbox.
 - Les service workers ont besoin d'https sauf sur localhost.
 
 ## Commandes
-Il existe 2 manières de mettre en cache les pages :
+Il existe 2 manières de mettre en cache les pages (A noter que les SW sont asynchrones, c'est pour cela qu'on n'utilise pas le localstorage):
 - Au chargement de la page en spécifiant tous les fichiers à mettre en cache :
 
   0. (Optionnel) Configuration 

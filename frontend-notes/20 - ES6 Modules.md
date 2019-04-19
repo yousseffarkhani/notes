@@ -29,6 +29,7 @@ export default function first (array) {
 }
   ```
 **Il y a 2 manières d’exporter : les named exports (si plusieurs fonctions doivent être exportées) ou default exports (export default functionOne)**
+
 2. Import : // demo.js file
 - Tout importer :
   `import * as utils from ‘./utils.js’ //utils.first([1,2,3])`
@@ -40,7 +41,9 @@ export default function first (array) {
   `import first, { first } from ‘./utils.js’`
       
       
-Il faut absolument déclarer `<script type="module" src="demo.js"></script>` dans le fichier html
+Il faut absolument déclarer `<script type="module" src="demo.js"></script>` dans le fichier html.
+Sur Firefox, cela va fonctionner. Cependant sur chrome, il faut lancer un serveur web pour que ça marche. Pour cela se placer dans le root du projet et lancer `http-server -c-1`.
+`Http-server` permet de servir des fichiers statiques (`-c-1` désactive le caching)
 
 ## Histoire
 ES6 modules est très récent. Jusqu’à présent, on utilisait des external module bundler.
@@ -51,11 +54,15 @@ ES6 modules est très récent. Jusqu’à présent, on utilisait des external mo
        A la base npm était un  package manager conçu spécifiquement pour node.js
 
 #### Processus de création d’un package avec npm :
-A) Se placer dans le repo et saisir : `npm init` → Cela permet de générer un fichier package.json qui stocke toutes les informations sur le projet
-B) Installer un package (librairie) : `npm install "nom de la librairie" --save` → Cette commande permet de télécharger le code du package dans un fichier appelé node_modules et de créer une entrée dans package.json spécifiant la nouvelle dépendance (grâce à save).
-C) Package.json est pratique car pour partager le projet, il n’y aura pas besoin d’envoyer tous les node_modules mais seulement package.json qui permettra à une autre personne d’installer les packages via la commande : `npm install`
-D) Insérer  `<script src="node_modules/moment/min/moment.min.js"></script>` dans le fichier html.
-E) Le problème de cette solution est qu’il faut ajouter toutes les librairies 1 par 1 dans le fichier html. C’est là qu’interviennent les module bundler (webpack)
+A. Se placer dans le repo et saisir : `npm init` → Cela permet de générer un fichier package.json qui stocke toutes les informations sur le projet
+
+B. Installer un package (librairie) : `npm install "nom de la librairie" --save` → Cette commande permet de télécharger le code du package dans un fichier appelé node_modules et de créer une entrée dans package.json spécifiant la nouvelle dépendance (grâce à save).
+
+C. Package.json est pratique car pour partager le projet, il n’y aura pas besoin d’envoyer tous les node_modules mais seulement package.json qui permettra à une autre personne d’installer les packages via la commande : `npm install`
+
+D. Insérer  `<script src="node_modules/moment/min/moment.min.js"></script>` dans le fichier html.
+
+E. Le problème de cette solution est qu’il faut ajouter toutes les librairies 1 par 1 dans le fichier html. C’est là qu’interviennent les module bundler (webpack)
 
 3. Tous les langages de programmation permettent d’importer du code d’un fichier à un autre. Cependant, javascript ne permet pas cette fonctionnalité car JS a été designé en vue d’être utilisé depuis un navigateur et on ne souhaitait pas autoriser l’accès au système de fichier du client (pour des raisons de sécurité). 
        Dans un 1er temps la fonctionnalité a été développée pour node.js, grâce à au script suivant :
@@ -65,7 +72,9 @@ E) Le problème de cette solution est qu’il faut ajouter toutes les librairies
        Pour installer webpack, il faut saisir : `npm install webpack webpack-cli --save-dev //save-dev sauvegarde cette dépendance dans l’environnement de développement spécifiquement`
 #### Processus d’utilisation de webpack :
 A) Pour utiliser webpack, saisir : `./node_modules/.bin/webpack index.js --mode=development`
+
 B) Cette commande va lancer webpack sur notre fichier index.js et rechercher les « require » et les remplacer par le code approprié.
+
 C) Le fichier final sera dans `dist/main.js`, il faut mettre à jour la source du script dans le html.
 **/!\ `--mode=development` permet de garder le fichier lisible. `--mode=production` aurait pour effet de générer un fichier minifié.**
 Avec l’utilisation de webpack, il faudra relancer les commandes décrites ci-dessus à chaque changement de index.js.
@@ -94,9 +103,10 @@ Pour pouvoir lancer ces tâches, il faut rajouter à package.json :
     "watch": "webpack --progress --watch"
 }
 ```
-`--progress` : permet de voir l’avancée en %
-`--mode=production` : permet de minifier le code
-`–watch` relance webpack à chaque modification d’un fichier JS.
+- `--progress` : permet de voir l’avancée en %
+- `--mode=production` : permet de minifier le code
+- `–watch` relance webpack à chaque modification d’un fichier JS.
+
 Pour lancer les scripts :
 - `npm run build`
 - `npm run watch`
