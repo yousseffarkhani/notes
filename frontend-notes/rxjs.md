@@ -129,6 +129,12 @@ console.log(tar.value);
 La puissance de Rxjs provient des operators permettant de réaliser de multiples opérations.
 L'ordre de déclaration des opérateurs est important.
 
+- tap("fonction") :
+  - Utilité : Permet de faire des choses sans modifier l'observable d'entrée. Très pratique pour le débuggage.
+  - Valeur de retour : Le même observable qu'à l'entrée
+- take(number) :
+  - Utilité : Permet de limiter le nombre de retours avec le nombre spécifié et complete l'observable.
+  - Valeur de retour : Les valeurs des n premiers observables.
 - map("fonction") :
   - Utilité : Applique une fonction sur un observable et renvoie ce dernier
   - Valeur de retour : Un observable avec la fonction appliquée dessus
@@ -165,7 +171,7 @@ L'ordre de déclaration des opérateurs est important.
   ```
 - mergeMap :
   - Utilité : Permet de combiner les valeurs de 2 observables
-  - Valeur de retour : Valeurs combinées des 2 observales
+  - Valeur de retour : Valeurs combinées des 2 observables
   - Point d'attention : L'observable ne se déclenche que quand l'inner observable est déclenché.
   - Exemple :
 
@@ -187,6 +193,69 @@ inputObservable1
   - Utilité : A chaque émission de données, annule la souscription au précédent observable et souscrit le nouvel observable. (Utile pour gérer des clicks events et éviter les spams). Utile pour l'auto-complétion car nous n'avons pas besoin du retour de la requête précédente.
   - Valeur de retour : La valeur de l'inner observable
   - Exemple : `obs.pipe(switchMap(() => itv)).subscribe(console.log);`
+- concat :
+  - Utilité : Souscrit les observables dans l'ordre donné uniquement lorsque le précédent est complété.
+  - Valeur de retour : La valeur des observables dans l'ordre défini
+  - Exemple :
+
+```javascript
+// Rajouter le pipe
+const getPostOne$ = Rx.Observable.timer(3000).mapTo({ id: 1 });
+const getPostTwo$ = Rx.Observable.timer(1000).mapTo({ id: 2 });
+
+Rx.Observable.concat(getPostOne$, getPostTwo$).subscribe(res =>
+  console.log(res)
+);
+```
+
+- forkJoin :
+  - Utilité : Similaire à Promise.all(). Attends que l'ensemble des observables retourne une valeur pour renvoyer un array avec les résultats.
+  - Valeur de retour : Array contenant tous les résultats
+  - Exemple :
+
+```javascript
+// Rajouter le pipe
+const getPostOne$ = Rx.Observable.timer(1000).mapTo({ id: 1 });
+const getPostTwo$ = Rx.Observable.timer(2000).mapTo({ id: 2 });
+
+Rx.Observable.forkJoin(getPostOne$, getPostTwo$).subscribe(res =>
+  console.log(res)
+);
+```
+
+- pairwise :
+  - Utilité : Renvoi la valeur actuelle et la précédente
+  - Valeur de retour : Array contenant les 2 valeurs
+  - Exemple :
+
+```javascript
+// Rajouter le pipe
+Rx.Observable.fromEvent(document, "scroll")
+  .map(e => window.pageYOffset)
+  .pairwise()
+  .subscribe(pair => console.log(pair)); // pair[1] - pair[0]
+```
+
+- combineLatest :
+  - Utilité : A chaque émission renvoi les valeurs actuelles de plusieurs observables
+  - Valeur de retour : Array contenant les différentes valeurs
+  - Exemple :
+
+```javascript
+// Rajouter le pipe
+Rx.Observable.combineLatest(intervalOne$, intervalTwo$).subscribe(all =>
+  console.log(all)
+);
+```
+
+- exhaustMap :
+  - Utilité : Attend pour émettre la valeur jusqu'à ce que l'observable soit complété (pratique pour les requêtes HTTP)
+  - Valeur de retour : Array contenant les différentes valeurs
+  - Exemple :
+
+```javascript
+exhaustMap(() => Rx.Observable.fromPromise(fetch(getQuotesAPI())));
+```
 
 ## Use-case
 
