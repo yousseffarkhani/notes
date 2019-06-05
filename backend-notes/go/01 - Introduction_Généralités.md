@@ -9,7 +9,9 @@ Les programmes démarrent dans le package main.
 ## Déclarer une variable
 
 var c bool
+
 var i int
+
 var i, j = 1, 2
 
 Dans les fonctions, il est possible d'utiliser := pour assigner une valeur à une variable sans déclarer le type.
@@ -65,6 +67,14 @@ if x < 0 {}
 Comme dans la boucle for, le if statement peut réaliser une opération avant la lecture de la condition. Les variables ainsi déclarées sont dans le scope du if.
 if v := 20\*x; v < 40 {}
 
+Les variables déclarées dans les if sont également disponibles dans les else.
+
+## Switch
+
+Le switch est différent dans le Go :
+
+- Il n'y a pas besoin de déclarer de break cela est fait automatiquement
+
 # Functions
 
 ## Déclarer une fonction
@@ -93,6 +103,34 @@ y = sum -x
 return
 }
 
+# Defer
+
+Un defer statement repousse l'exécution d'une fonction à plus tard (jusqu'à ce que les fonctions autour retournent une valeur)
+Exemple :
+
+```go
+func main() {
+	defer fmt.Println("world")
+	fmt.Println("hello")
+}
+```
+
+S'il y a plusieurs defer pushed onto a stach, elles sont lancées en last-in-first-out.
+
+```go
+func main() {
+	fmt.Println("counting")
+
+	for i := 0; i < 10; i++ {
+		defer fmt.Println(i)
+	}
+
+	fmt.Println("done")
+}
+```
+
+https://blog.golang.org/defer-panic-and-recover
+
 # Packages
 
 Pour importer un package : import ("nom_du_package")
@@ -100,9 +138,12 @@ Pour importer un package : import ("nom_du_package")
 Listes de packages :
 
 - fmt :
-  - fmt.Println("string")
+  fmt permet d'afficher des éléments dans la console.
+  - fmt.Println("string") : permet d'afficher un string ou une variable
+  - fmt.Printf("%v", variable) : permet d'utiliser les formes %v, ...
     - %g, %T pour afficher le type, %v pour la valeur
 - math/rand :
   - rand.Intn(10)
 - math :
   - math.Sqrt(7)
+    -time : - time.Now().Weekday permet de retourner le jour - time.Now().Weekday() + 1 : Lendemain - time.Saturday - time.Now().Hour() extrait l'heure
