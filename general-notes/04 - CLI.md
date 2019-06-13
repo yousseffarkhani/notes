@@ -52,7 +52,9 @@ Il existe plusieurs moyens d'installer des programmes sur Ubuntu :
   Installer : 1) Ajouter le repo (ici le PPA du Numix project): `sudo add-apt-repository ppa:numix/ppa` 2) `sudo apt-get update` 3) `sudo apt-get install numix-gtk-theme numix-icon-theme-circle`
   Supprimer : 1) `sudo apt-get remove numix-gtk-theme numix-icon-theme-circle` 2) `sudo add-apt-repository --remove ppa:numix/ppa`
 - Utiliser snap
+  https://itsfoss.com/use-snap-packages-ubuntu-16-04/
 - Utiliser dpkg
+  https://help.ubuntu.com/lts/serverguide/dpkg.html
 - Utiliser le code source de l'application
 
 #### Ouvrir des programmes
