@@ -52,6 +52,7 @@ m[key] = elem
 ```go
 elem = m[key]
 ```
+Si on essaie d'accèder à un élément qui n'existe pas alors la zero value sera retournée.
 
 ## Supprimer un élément
 
@@ -67,3 +68,11 @@ elem, ok = m[key] //Si elem et ok n'ont pas été déclaré au préalable, on pe
 // Si la clé n'est pas m alors ok = false et elem = valeur 0 de l'élément type
 // Si pas besoin de elem alors _, ok = m[key]
 ```
+# Itérer sur une map
+L'ordre de récupération des éléments ne sera pas forcément le même à chaque execution du programme.
+```go
+for key, value := range map {
+}
+```
+# Reference type
+De même que les slices, les maps sont des références. C'est pourquoi quand une map est assigné à plusieurs variables, celle-ci sera commune à toutes les variables (de même lorsque la map est passée en argument d'une fonction).

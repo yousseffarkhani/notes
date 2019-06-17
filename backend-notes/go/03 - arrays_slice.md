@@ -7,14 +7,21 @@ Les array en Go ne peuvent pas être resizé.
 ## Déclarer un array
 
 ```go
-var a [10]int // Les valeurs sont à null
+var a [10]int // Les valeurs sont à 0
+/* Shorthand declaration */
 primes := [6]int{2, 3, 5, 7, 11, 13}
+/* Assignation automatique d'une lenght */
+a := [...]int{1, 2, 3}
 ```
 
+En go, les arrays sont des values types et non des reference types ce qui signifie que quand on attribue un array à une nouvelle variable alors une copie de cet array est crée. Il n'y aura aucun impact sur l'array original si les valeurs sont modifiés dans cette nouvelle variable.
+
+De même lorsque les arrays sont passés dans des fonctions en tant que paramètres l'array original n'est pas modifié
 # Slices
 
 Les slices sont des sortes d'array mais plus flexibles.
 Un slice est crée à partir d'un Array en spécifiant 2 indices, une limite haute et une limite basse. Cela permet de sélectionner le 1er élément jusqu'à la limite haute (exclue).
+En réalité, un slice est une référence ) un array.
 
 ```go
 primes := [6]int{2, 3, 5, 7, 11, 13}
@@ -27,7 +34,7 @@ A noter qu'un slice ne contient pas de données mais uniquement une référence 
 ## Créer un slice
 
 ```go
-var s := []bool{true, true, false}
+var s := []bool{true, true, false} // Créer un array et retourne la référence
 ```
 
 ### Déclarer un array de struct directement dans la définition d'une variable
@@ -124,4 +131,23 @@ var s []int
 	3,
     }
     s = append(s, b...) // len=3 cap=3 [1 2 3]
+```
+
+# Optimisation de la mémoire
+Etant donné que les slices gardent en mémoire une référence vers un array, cela signifie que tant que le slice existe, l'array existera et ne pourra pas être garbage collected.
+Exemple : Nous avons besoin d'une petite partie d'un énorme array. Nous créons donc un slice de la partie qui nous interesse. L'énorme array continuera à exister.
+La solution à ce problème est d'utiliser la fonction copy permettant de faire une copie du slice.
+
+```go
+func countries() []string {  
+    countries := []string{"USA", "Singapore", "Germany", "India", "Australia"}
+    neededCountries := countries[:len(countries)-2] // Créer un slice
+    countriesCpy := make([]string, len(neededCountries))
+    copy(countriesCpy, neededCountries) //copies neededCountries to countriesCpy
+    return countriesCpy
+}
+func main() {  
+    countriesNeeded := countries()
+    fmt.Println(countriesNeeded)
+}
 ```

@@ -28,6 +28,8 @@ La zero value (0 pour les numériques, false pour les boolean et "" pour les str
 
 ```go
 bool, string, int, float32
+var u uint (unsigned int)
+var u uint8 (unsigned int sur 8 bits 0 -> 255)
 ```
 
 ## Convertir des variables
@@ -101,6 +103,8 @@ Les variables déclarées dans les if sont également disponibles dans les else.
 Le switch est différent dans le Go :
 
 - Il n'y a pas besoin de déclarer de break cela est fait automatiquement
+
+Pour reproduire le comportement d'autres langages (ie. exécuter le case suivant), il faut ajouter fallthrough à la fin du case.
 
 # Functions
 
