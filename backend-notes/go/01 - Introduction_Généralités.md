@@ -143,31 +143,3 @@ y = sum -x
 return
 }
 ```
-
-# Defer
-
-Un defer statement repousse l'exécution d'une fonction à plus tard (jusqu'à ce que les fonctions autour retournent une valeur)
-Exemple :
-
-```go
-func main() {
-	defer fmt.Println("world")
-	fmt.Println("hello")
-}
-```
-
-S'il y a plusieurs defer pushed onto a stack, elles sont lancées en last-in-first-out.
-
-```go
-func main() {
-	fmt.Println("counting")
-
-	for i := 0; i < 10; i++ {
-		defer fmt.Println(i)
-	}
-
-	fmt.Println("done")
-}
-```
-
-https://blog.golang.org/defer-panic-and-recover

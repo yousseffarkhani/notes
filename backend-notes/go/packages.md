@@ -57,7 +57,8 @@ func main() {
   - time 
     - time.Tick(100*time.Millisecond) : Déclenche un timer qui se déclenche toutes les 100 ms
     - time.After(500*time.Millisecond) : Déclenche un timer qui se déclenche au bout de 500 ms
-    - time.Millisecond : Renvoie l'équivalent de 1ms. Il est obligatoire de l'avoir dans les fonctions au dessus pour qu'elles fonctionnent.
+    - time.Millisecond/Second : Renvoie l'équivalent de 1ms. Il est obligatoire de l'avoir dans les fonctions au dessus pour qu'elles fonctionnent.
+    
   - log
     - log.Fatal("message") : Arrête l'exécution du programme et log un message dans le terminal avec des informations temporelles (2019/06/17 10:36:35 message).
   - unicode/utf8
