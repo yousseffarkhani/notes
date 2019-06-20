@@ -72,26 +72,3 @@ Append est une fonction variadic.
 ### Fonctionnement de append
 Si le slice passé en argument est de taille suffisante alors celui-ci est directement modifié sinon un nouveau slice est crée et le slice original n'est pas touché.
 https://play.golang.org/p/THiBHCyjCZH
-# Closures
-
-Les fonctions disposent de closure.
-
-```go
-func adder() func(int) int {
-	sum := 0
-	return func(x int) int {
-		sum += x
-		return sum
-	}
-}
-
-func main() {
-	pos, neg := adder(), adder()
-	for i := 0; i < 10; i++ {
-		fmt.Println(
-			pos(i),
-			neg(-2*i),
-		)
-	}
-}
-```
