@@ -1,4 +1,5 @@
 # Pointers
+
 http://www.cplusplus.com/doc/tutorial/pointers/
 
 ## Introduction
@@ -17,6 +18,7 @@ fmt.Println(*p) // Permet de lire i par l'intérmédiaire du pointer p (aussi ap
 ```
 
 ## Retourner un pointer d'une fonction
+
 ```go
 func hello() *int {
     i := 55
@@ -28,7 +30,9 @@ func main(){
     fmt.Println(*num)
 }
 ```
+
 ## Modifier un array dans une fonction à l'aide de l'adresse
+
 Il est possible d'envoyer l'adresse mémoire de l'array est ensuite modifier mais le plus simple est d'utiliser les slices.
 
 ```go

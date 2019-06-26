@@ -29,7 +29,7 @@ Ce package contient une fonction String prenant en entreé le nom du flag, la va
 ```go
 func main() {  
     fptr := flag.String("fpath", "test.txt", "file path to read from") // Retourne l'adresse de la variable string contenant la valeur du flag
-    flag.Parse() // Doit être appelé avant le flag soit exploité
+    flag.Parse() // Doit être appelé pour récupérer le flag entré par le user
     fmt.Println("value of fpath is", *fptr)
 }
 ```

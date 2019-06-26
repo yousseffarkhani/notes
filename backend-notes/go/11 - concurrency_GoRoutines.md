@@ -1,16 +1,16 @@
-// TODO : Rechercher différence entre concurrency et parallelism
-
 # Introduction
 
-Go est un concurrent* language.
+Go est un concurrent\* language.
 Cette notion de concurrency est gérée à travers des Goroutines et des channels.
 
 # Goroutine
+
 Une Goroutine est un thread\* managé par le Go runtime.
 Les Goroutine permettent de lancer des fonctions/méthodes de manière concurente
 Les goroutines sont lancées dans le même espace d'adresse. L'accès à la mémoire partagée doit être synchronisé. (voir sync package)
 
 ## Avantages des Goroutines par rapport aux threads
+
 - Les Goroutines sont légères comparées à des threads.
 - Les Goroutines sont liées à moins d'OS threads. Un seul thread peut contenir des milliers de Goroutines. Si une Goroutine bloque le thread alors un autre thread est généré et les Goroutines en attente seront basculées dessus (Tout cela est géré par le runtime).
 
@@ -29,7 +29,9 @@ func main(){
 	fmt.Println("world")
 }
 ```
+
 Ce programme affichera world car :
+
 - Quand une Goroutine est lancée le contrôle est redonné immédiatement à la ligne suivante.
 - Lorsque la main Goroutine est terminée alors le programme est terminé.
 
@@ -41,14 +43,17 @@ Les channels sont des conduits permettant d'envoyer et recevoir des valeurs.
 Les channels permettent de bloquer l'exécution d'un programme en attendant que des Goroutines finissent leurs exécutions.
 
 ## Déclarer un channel
+
 Les channels doivent être crées avant d'être utilisés : `ch := make(chan int)`.
 Pour cela, il faut déclarer le type transporté par le channel.
 
 ## Envoyer et recevoir depuis un channel
+
 ```go
 ch <- v    // Send v to channel ch.
 v := <-ch  // Receive from ch, and assign value to v.
 ```
+
 Par défaut les blocks d'envoi et de réception bloquent la suite du programme. Cela permet de synchroniser facilement le programme.
 
 ```go
@@ -78,7 +83,9 @@ func main() {
 	fmt.Println("main function")
 }
 ```
+
 Exemple plus complexe
+
 ```go
 func calcSquare(input int, square chan int) {
 	sum := 0
@@ -113,32 +120,38 @@ func main() {
 ```
 
 # Deadlock
+
 Si une Goroutine envoie des données dans un channel alors le programme s'attend à ce qu'une autre Goroutine reçoive les données. Si cela n'arrive pas alors le programme renvoie une erreur deadlock.
 
 De même si une Goroutine s'attend à recevoir des données d'un channel alors le programme s'attend à ce qu'une autre Goroutine envoie des données.
+
 ```go
-func main() {  
+func main() {
     ch := make(chan int)
     ch <- 5 // Provoque une erreur car aucune autre Goroutine n'exploite cette valeur.
 }
 ```
 
 # Unidirectionnal channels
+
 Les channels présentés jusqu'à présent sont bidirectionnels, ils peuvent recevoir et envoyer des données.
 Il est également possible de créer des channels unidirectionnels.
+
 ```go
-func sendData(sendch chan<- int) {  
+func sendData(sendch chan<- int) {
     sendch <- 10
 }
 
-func main() {  
+func main() {
     sendch := make(chan<- int) // Création d'un send only channel
     go sendData(sendch)
     fmt.Println(<-sendch) // génère une erreur car il s'agit d'un send only channel
 }
 ```
+
 Le réel interêt des channels unidirectionnels est de sécuriser le code en convertissant les channels bidirectionnels en fonction de l'usage souhaité.
 La conversion se fait d'un channel bidirectionnel vers un channel unidirectionnel mais pas l'inverse.
+
 ```go
 func hello(input chan<- string) { // Channel conversion to a send only
 	input <- "hello"
@@ -152,20 +165,22 @@ func main() {
 ```
 
 # Closing channels and for loops
+
 Une channel peut être fermée à l'aide de `close(c)` pour indiquer qu'il n'y a plus de valeurs à envoyer.
 Seule la fonction envoyant les données devrait pouvoir fermer le channel.
 
 La fonction ayant fait appel à une goroutine peut tester si le channel est ouvert ou fermé : `v, ok := <- ch`. S'il n'y a plus de valeurs à transmettre ok est false.
 La loop for i:= range c reçoit les valeurs du channel jusqu'à la fermeture de celui-ci.
+
 ```go
-func producer(chnl chan int) {  
+func producer(chnl chan int) {
     for i := 0; i < 10; i++ {
         chnl <- i
     }
     close(chnl) // Ferme le channel
 }
 
-func main() {  
+func main() {
     ch := make(chan int)
     go producer(ch)
     for v := range ch { // Boucle sur les valeurs du channel
@@ -197,25 +212,27 @@ func main () {
 
 Il est possible de configurer la taille du channel (le nombre de valeurs qu'il va retenir).
 Pour cela, il faut le déclarer de cette manière : `ch := make(chan int, 100)`
+
 ```go
 ch := make(chan int, 2)
 ch <- 1
 ch <- 2
 ch <- 3 // L'écriture est bloquée et provoque une erreur car la taille du buffer est de 2
 ```
+
 L'interêt étant que contrairement aux unbuffered channels, les envois au channel ne seront bloqués que lorsque le buffer sera full. De même la réception sera bloquée lorsque le buffer sera vide.
 
 Lorsqu'une valeur est lue, elle est retirée du buffer.
 
 ```go
-func write(ch chan int) {  
+func write(ch chan int) {
     for i := 0; i < 5; i++ {
         ch <- i // Va écrire 0 et 1 dans ch et ensuite bloquer jusqu'à ce qu'au moins 1 valeur soit lue
         fmt.Println("successfully wrote", i, "to ch")
     }
     close(ch)
 }
-func main() {  
+func main() {
     ch := make(chan int, 2) // Buffered channel déclaré
     go write(ch) // Lancement de la Goroutine
     time.Sleep(2 * time.Second)
@@ -226,22 +243,26 @@ func main() {
     }
 }
 ```
+
 # Worker Pools
+
 ## WaitGroup
+
 Un WaitGroup est utilisé pour attendre l'exécution de plusieurs Goroutines.
 Le contrôle est bloqué en attendant la fin des Goroutines.
 
 Le waitGroup fonctionne comme un compteur. Il est incrémenté avec la méthode Add(1) et décrémenté avec Done().
 La méthode Wait bloque la Goroutine où elle est appelée jusqu'à ce que le compteur soit à 0.
+
 ```go
-func process(i int, wg *sync.WaitGroup) {  
+func process(i int, wg *sync.WaitGroup) {
     fmt.Println("started Goroutine ", i)
     time.Sleep(2 * time.Second)
     fmt.Printf("Goroutine %d ended\n", i)
     wg.Done() // Lorsque la Goroutine est terminée décrémente le compteur.
 }
 
-func main() {  
+func main() {
     no := 3
     var wg sync.WaitGroup
     for i := 0; i < no; i++ {
@@ -252,7 +273,9 @@ func main() {
     fmt.Println("All go routines finished executing")
 }
 ```
+
 ## Worker Pool
+
 L'utilisation la plus importante des buffered channels est pour l'implémentation des worker Pools.
 Une worker Pool est une collection de threads en attente d'avoir une tâche assignée. Une fois la tâche terminée, ils redeviennent disponibles pour la prochaine tâche.
 
@@ -336,6 +359,7 @@ func main() {
 	fmt.Println("total time taken ", diff.Seconds(), "seconds")
 }
 ```
+
 #Select
 
 Select permet de choisir entre plusieurs send/receive operations.
@@ -364,16 +388,19 @@ func main() {
 }
 ```
 
-> La raison d'avoir un select est notamment dans le cas où on a besoin de retourner une réponse rapidement à l'utilisateur après une requête à la BDD. Les BDD sont souvent répliquées donc plusieurs appels peuvent être effectués. Dès qu'une requête aura été remplie alors les autres seront abandonnées. 
+> La raison d'avoir un select est notamment dans le cas où on a besoin de retourner une réponse rapidement à l'utilisateur après une requête à la BDD. Les BDD sont souvent répliquées donc plusieurs appels peuvent être effectués. Dès qu'une requête aura été remplie alors les autres seront abandonnées.
+
 ## Default Selection
+
 Le default case est lancé si aucun des autres case n'est prêt. Il est utilisé pour ne pas bloquer le programme en cas de problème.
+
 ```go
-func process(ch chan string) {  
+func process(ch chan string) {
     time.Sleep(10500 * time.Millisecond)
     ch <- "process successful"
 }
 
-func main() {  
+func main() {
     ch := make(chan string)
     go process(ch)
     for {
@@ -394,7 +421,7 @@ Le default permet également d'éviter des erreurs de deadlock.
 
 ```go
 
-func main() {  
+func main() {
     ch := make(chan string)
     select {
     case <-ch:
@@ -419,14 +446,14 @@ func main() {
 ## Binary tree
 
 ```
-Un binary tree est un arbre comportant 1 root et des childs disposant de childs également. En bout de chaine, nous avons les leafs ne disposant pas de child. 
+Un binary tree est un arbre comportant 1 root et des childs disposant de childs également. En bout de chaine, nous avons les leafs ne disposant pas de child.
 Un arbre binaire signifie que chaque noeud comporte au maximum 2 childs.
 ```
 
 ## Concurrency
 
 ```
-C'est la capacité à gérer plusieurs évenements en même temps. 
+C'est la capacité à gérer plusieurs évenements en même temps.
 ```
-![](./attachments/concurrency-parallelism-copy.png)
 
+![](./attachments/concurrency-parallelism-copy.png)
