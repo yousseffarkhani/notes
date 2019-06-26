@@ -1,3 +1,5 @@
+Source : https://quii.gitbook.io/learn-go-with-tests/
+
 # Introduction
 
 En Go, il n'y a pas besoin de framework de test, tout est fourni directement.
@@ -11,6 +13,15 @@ En Go, il n'y a pas besoin de framework de test, tout est fourni directement.
 4. Ecrire le minimum de code pour passer le test
 5. Refactorer (même le code de test)
 6. Retester
+
+# Tips
+
+- La définition de refactoring est le code change mais le comportement reste le même. En théorie le test n'a pas besoin de changer.
+  - Est ce que je teste le comportement ou l'implémentation du code ?
+  - Si je refactore le code, est ce que j'aurais beaucoup de choses à changer dans les tests ?
+- Ne pas tester les private functions car elles ont avoir avec l'implémentation.
+- Si un test a besoin de 3 mocks pour fonctionner alors il faut repenser le design de la fonction.
+- Utiliser les spies avec précaution (etre sur que les détails sont intéressants)
 
 # Règles à suivre
 
@@ -219,20 +230,25 @@ func TestGreet(t *testing.T) {
 
 # Mocking
 
-Le mocking est intéressant car en tant que développeur, nous voulons avoir des feedback loops rapides. Ainsi le mocking permet :
+Le mocking est intéressant car en tant que développeur, nous voulons avoir des feedback loops rapides.
+Le mocking permet :
 
-- d'éviter d'attendre des appels de WS / des timers / ...pour tester
+- de simuler un appel de WS / des timers / ... et donc de ne pas avoir à attendre
+- Tester un state particulier du système
+- Eviter la dépendance envers des services / databases
+
+## Spies
 
 Pour mocker, il faut :
 
 1. Créer une interface comportant la méthode que nous souhaitons injecter.
 2. Dans le fichier de test, nous allons créer un spy c'est à dire créer un struct comportant les indicateurs souhaités (nombre d'appels, arguments passés) et implémentant l'interface définie au préalable.
 
-**fichier de test**
+**Source code**
 
 ```go
 func main() {
-sleeper := DefaultSleeper{}
+sleeper := &ConfigurableSleeper{1 * time.Second, time.Sleep}
 Countdown(os.Stdout, sleeper)
 }
 
@@ -243,10 +259,13 @@ type Sleeper interface {
 Sleep()
 }
 
-type DefaultSleeper struct{}
+type ConfigurableSleeper struct {
+	duration time.Duration // Permet de configurer le time slept
+	sleep    func(time.Duration) // Permet de donner une fonction ayant pour paramètre un type time.Duration
+}
 
-func (d DefaultSleeper) Sleep() { // Impossible de fournir time en argument de Countdown dans main()
-time.Sleep(1 \* time.Second)
+func (c ConfigurableSleeper) Sleep() {
+	c.sleep(c.duration) // Intéressant, utilisation d'une fonction donnée en paramètre
 }
 
 func Countdown(writer io.Writer, sleeper Sleeper) {
@@ -260,7 +279,7 @@ fmt.Fprint(writer, finalWord)
 
 ```
 
-**Source code**
+**fichier de test**
 
 ```go
 type CountdownOperationsSpy struct { // Implements both io.Writer and Sleeper
@@ -315,6 +334,27 @@ Go!`
 			t.Errorf("wanted calls %v got %v", want, spySleepPrinter.Calls)
 		}
 	})
+}
+
+type SpyTime struct {
+	durationSlept time.Duration
+}
+
+func (s *SpyTime) Sleep(duration time.Duration) {
+	s.durationSlept = duration
+}
+
+func TestConfigurableSleeper(t *testing.T) {
+	sleepTime := 5 * time.Second
+
+	spyTime := &SpyTime{}
+
+	sleeper := ConfigurableSleeper{sleepTime, spyTime.Sleep}
+	sleeper.Sleep()
+
+	if spyTime.durationSlept != sleepTime {
+		t.Errorf("should have slept for %v but slept for %v", sleepTime, spyTime.durationSlept)
+	}
 }
 ```
 
