@@ -26,6 +26,7 @@ En Go, il n'y a pas besoin de framework de test, tout est fourni directement.
 # Règles à suivre
 
 - Le fichier de test doit se nommer xxx_test.go
+- Le fichier de test doit inclure le package `nomDuPackage_test` (pour n'aoir accès qu'aux variables partagées)
 - La fonction de test doit démarrer avec le mot Test.
 - La fonction de test ne prend qu'un argument : `t *testing.T`
   - Ce type permet de faire des appels aux méthodes suivantes :
@@ -71,6 +72,49 @@ func TestHello(t *testing.T) {
 	})
 }
 ```
+
+# Helpers and stubs
+
+Dans le cadre des tests, il y aura souvent besoin de helpers (fonction permettant de tester et se répétant dans le code de test)
+
+```go
+func AssertPlayerWin(t *testing.T, store *StubPlayerStore, winner string) {
+	t.Helper()
+
+	if len(store.winCalls) != 1 {
+		t.Fatalf("got %d calls to RecordWin want %d", len(store.winCalls), 1)
+	}
+
+	if store.winCalls[0] != winner {
+		t.Errorf("did not store correct winner got '%s' want '%s'", store.winCalls[0], winner)
+	}
+}
+```
+
+Les stubs quand à eux permettent de simuler l'intégration d'un élément externe en implémentant l'interface de l'élément externe (ie une BDD)
+
+```go
+type StubPlayerStore struct {
+	scores   map[string]int
+	winCalls []string
+	league   League
+}
+
+func (s *StubPlayerStore) GetPlayerScore(name string) int {
+	score := s.scores[name]
+	return score
+}
+
+func (s *StubPlayerStore) RecordWin(name string) {
+	s.winCalls = append(s.winCalls, name)
+}
+
+func (s *StubPlayerStore) GetLeague() League {
+	return s.league
+}
+```
+
+**Il est intéressant de mettre ce genre d'élément dans un fichier à part (testing.go). Cela est utile car les utilisateurs du package pourront écrire des tests sans réinventer la roue.**
 
 # Table based tests
 
@@ -142,6 +186,13 @@ Errcheck permet de vérifier que toutes les erreurs renvoyées par le programme 
 
 1. Installer errcheck : `go get -u github.com/kisielk/errcheck`
 2. Puis saisir : `errcheck` dans la CLI
+
+Si ça ne marche saisir dans la CLI :
+
+```bash
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
+```
 
 # Dependency injection
 

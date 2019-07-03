@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Les array en Go ne peuvent pas être resizé.
+Les arrays en Go ne peuvent pas être resizés.
 
 ## Déclarer un array
 
@@ -17,6 +17,7 @@ a := [...]int{1, 2, 3}
 En go, les arrays sont des values types et non des reference types ce qui signifie que quand on attribue un array à une nouvelle variable alors une copie de cet array est crée. Il n'y aura aucun impact sur l'array original si les valeurs sont modifiés dans cette nouvelle variable.
 
 De même lorsque les arrays sont passés dans des fonctions en tant que paramètres l'array original n'est pas modifié
+
 # Slices
 
 Les slices sont des sortes d'array mais plus flexibles.
@@ -134,19 +135,20 @@ var s []int
 ```
 
 # Optimisation de la mémoire
+
 Etant donné que les slices gardent en mémoire une référence vers un array, cela signifie que tant que le slice existe, l'array existera et ne pourra pas être garbage collected.
 Exemple : Nous avons besoin d'une petite partie d'un énorme array. Nous créons donc un slice de la partie qui nous interesse. L'énorme array continuera à exister.
 La solution à ce problème est d'utiliser la fonction copy permettant de faire une copie du slice.
 
 ```go
-func countries() []string {  
+func countries() []string {
     countries := []string{"USA", "Singapore", "Germany", "India", "Australia"}
     neededCountries := countries[:len(countries)-2] // Créer un slice
     countriesCpy := make([]string, len(neededCountries))
     copy(countriesCpy, neededCountries) //copies neededCountries to countriesCpy
     return countriesCpy
 }
-func main() {  
+func main() {
     countriesNeeded := countries()
     fmt.Println(countriesNeeded)
 }

@@ -1,4 +1,5 @@
-# Introduction
+# Introduction
+
 Go fournit plusieurs fonctionnalités telle que Go doc.
 Cela permet de générer automatiquement de la documentation.
 
