@@ -1,6 +1,6 @@
 # Introduction
 
-Un string en go est un slice de bytes.
+**Un string en go est un slice de bytes.**
 Les strings sont immutables.
 
 Comme un string est un slice, il est possible d'accèder à chaque élément d'un string avec son index.
@@ -23,6 +23,17 @@ La raison de ce problème provient du faire que le caractère ñ est encodé sur
 Pour résoudre ce problème, nous utilisons les runes.
 
 # Runes
+
+Une rune est différente d'un byte car une rune est adapté au format utf-8 qui peut être composé de plusieurs bytes (emojis/ Caractères spéciaux).
+
+```go
+s :=  "Señor"
+for _, v := range s {
+    fmt.Printf("%c ",v)
+}
+```
+
+qui est équivalent à :
 
 ```go
 s :=  "Señor"

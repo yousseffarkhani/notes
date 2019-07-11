@@ -1,10 +1,11 @@
 # Introduction
 
 Une interface est un type définissant une liste de méthodes.
-**Lorsque qu'un type définit toutes les méthodes de la listen on dit que le type implémente l'interface.**
+**Lorsque qu'un type définit toutes les méthodes de la liste on dit que le type implémente l'interface.**
 L'interface spécifie les méthodes que doivent contenir les types et les types décident de l'implémentation de ces méthodes.
 
 # Déclarer et implémenter une interface
+
 ```go
 /* Interface definition */
 type VowelsFinder interface{
@@ -42,13 +43,13 @@ import (
 	"fmt"
 )
 
-type Permanent struct {  
+type Permanent struct {
     empId    int
     basicpay int
     pf       int
 }
 
-type Contract struct {  
+type Contract struct {
     empId  int
     basicpay int
 }
@@ -79,10 +80,10 @@ func main() {
     fmt.Println(sumSalaries(employees)) // Cette méthode prend en paramètre une interface donc plusieurs types
 }
 ```
+
 Le principal interêt est que sumSalaries peut être étendu à n'importe quel nouveau type d'employé (du moment qu'il implémente l'interface en définissant les méthodes).
 
 # Interface internal representation
-
 
 Une interface peut être vue comme une combinaison d'une valeur avec un type (type, value).
 
@@ -118,7 +119,7 @@ f := i.(float64) // Retourne une erreur panic
 
 # Type switches
 
-Un type switch permet d'enchainer plusieurs type assertions. 
+Un type switch permet d'enchainer plusieurs type assertions.
 Un type assertion peut également permettre de comparer avec une interface au lieu d'un type.
 
 ```go
@@ -185,8 +186,10 @@ func main() {
 Un type peut avoir plusieurs interfaces s'il implémente les méthodes de ces interfaces.
 
 # Embedded interfaces
-Il est possible de créer de nouvelles interfaces à partir d'autres interfaces. 
+
+Il est possible de créer de nouvelles interfaces à partir d'autres interfaces.
 Les types implémentant l'ensemble des méthodes implémenteront l'interface.
+
 ```go
 type Describer interface {
     Describe()
@@ -201,6 +204,7 @@ type Embedded interface {
     Test
 }
 ```
+
 # Nil interface values
 
 Les interfaces ne détiennent ni valeurs ni types.
@@ -216,7 +220,6 @@ func main() {
 	i.M() // Provoque une run-time error
 }
 ```
-
 
 <!-- A voir si je garde -->
 
@@ -341,10 +344,6 @@ func main(){
     i.M() // La méthode est appelée avec nil
 }
 ```
-
-
-
-
 
 # Stringers
 
