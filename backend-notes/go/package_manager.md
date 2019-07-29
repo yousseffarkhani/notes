@@ -1,3 +1,5 @@
+voir : https://www.ardanlabs.com/blog/2013/10/manage-dependencies-with-godep.html
+
 # Introduction
 
 Un package manager permettra de consigner et gérer les dépendances du projet vis à vis de librairies externes.
