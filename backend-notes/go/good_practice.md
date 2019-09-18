@@ -1,3 +1,5 @@
+https://github.com/golang/go/wiki/CodeReviewComments#named-result-parameters
+
 ```go
 const englishHelloPrefix = "Hello, " // Utilisation de constantes
 const spanishHelloPrefix = "Hola, "

@@ -45,3 +45,5 @@ func ExampleAdd() {
 ```
 
 Lancer godoc -http :8000 et aller sur localhost:8000/pkg, cela permet de voir tous les packages installés sur le système.
+
+Si le code a été publié sur une URL publique, il est possible de partager la documentation à godoc.org. Par exemple, https://godoc.org/github.com/quii/learn-go-with-tests/integers/v2

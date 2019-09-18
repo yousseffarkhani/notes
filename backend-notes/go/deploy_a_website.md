@@ -32,7 +32,7 @@ Pourquoi utiliser Docker pour deployer une application Go ?
 L'automatisation du déploiement consiste à :
 
 - Télécharger les dépendances
-- Build après qu'on changement ait été push sur le git repo
+- Build après que les changements aient été push sur le git repo
 - Effectuer les tests
 - Si le build est ok et que les tests sont ok alors construire une image Docker
 - Envoyer l'image vers le Docker Hub

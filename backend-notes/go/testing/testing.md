@@ -1,4 +1,15 @@
 Source : https://quii.gitbook.io/learn-go-with-tests/
+https://www.alexedwards.net/blog/an-overview-of-go-tooling
+
+# TL;DR
+1. go test
+2. errcheck
+3. go test -race
+4. go test -cover
+5. go vet
+
+Pour des examples voir testing
+
 
 # Introduction
 
@@ -19,14 +30,14 @@ En Go, il n'y a pas besoin de framework de test, tout est fourni directement.
 - La définition de refactoring est le code change mais le comportement reste le même. En théorie le test n'a pas besoin de changer.
   - Est ce que je teste le comportement ou l'implémentation du code ?
   - Si je refactore le code, est ce que j'aurais beaucoup de choses à changer dans les tests ?
-- Ne pas tester les private functions car elles ont avoir avec l'implémentation.
+- Ne pas tester les private functions car elles sont liées à l'implémentation.
 - Si un test a besoin de 3 mocks pour fonctionner alors il faut repenser le design de la fonction.
 - Utiliser les spies avec précaution (etre sur que les détails sont intéressants)
 
 # Règles à suivre
 
 - Le fichier de test doit se nommer xxx_test.go
-- Le fichier de test doit inclure le package `nomDuPackage_test` (pour n'aoir accès qu'aux variables partagées)
+- Le fichier de test doit inclure le package `nomDuPackage_test` (pour n'avoir accès qu'aux variables partagées)
 - La fonction de test doit démarrer avec le mot Test.
 - La fonction de test ne prend qu'un argument : `t *testing.T`
   - Ce type permet de faire des appels aux méthodes suivantes :
@@ -91,7 +102,14 @@ func AssertPlayerWin(t *testing.T, store *StubPlayerStore, winner string) {
 }
 ```
 
-Les stubs quand à eux permettent de simuler l'intégration d'un élément externe en implémentant l'interface de l'élément externe (ie une BDD)
+Les stubs quand à eux permettent de simuler l'intégration d'un élément externe en implémentant l'interface de l'élément externe (ie une BDD).
+
+Les stubs sont intéressants car en tant que développeur, nous voulons avoir des feedback loops rapides.
+Les stubs permettent :
+
+- de simuler un appel de WS / des timers / ... et donc de ne pas avoir à attendre
+- Tester un state particulier du système
+- Eviter la dépendance envers des services / databases
 
 ```go
 type StubPlayerStore struct {
@@ -279,18 +297,14 @@ func TestGreet(t *testing.T) {
 }
 ```
 
-# Mocking
 
-Le mocking est intéressant car en tant que développeur, nous voulons avoir des feedback loops rapides.
-Le mocking permet :
 
-- de simuler un appel de WS / des timers / ... et donc de ne pas avoir à attendre
-- Tester un state particulier du système
-- Eviter la dépendance envers des services / databases
+# Spies
+Pour réaliser nos tests, il faudra parfois "espionner" le programme.
 
-## Spies
+Pour cela, on utilise des spy.
 
-Pour mocker, il faut :
+Pour créer un spy :
 
 1. Créer une interface comportant la méthode que nous souhaitons injecter.
 2. Dans le fichier de test, nous allons créer un spy c'est à dire créer un struct comportant les indicateurs souhaités (nombre d'appels, arguments passés) et implémentant l'interface définie au préalable.

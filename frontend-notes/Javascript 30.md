@@ -6,9 +6,9 @@ modified: '2019-04-03T12:48:26.520Z'
 
 # Javascript 30
 Si besoin d’explications, voir https://medium.com/@cmurphy580/lessons-learned-from-the-javascript-30-challenge-bdc9ce5e47b0
-01 – Drum kit
+## 01 – Drum kit
 HTML
-Le tag <kbd>A<kd> représente une touche au clavier.
+Le tag <kbd>A<kbd> représente une touche au clavier.
 Il est possible de rajouter n’importe quel attribut à un tag avec le format data-attributName= « XX ».
 Exemple : <audio data-key="65" src="sounds/clap.wav"></audio>
 CSS
@@ -35,7 +35,7 @@ L’événement « transitionend » est déclenché lorsqu’une transition es
 Fonctions intéressantes : 
 audio.play() ; (après avoir querySelector un tag HTML audio)
 
-02 – Clock
+## 02 – Clock
 CSS
 Propriétés intéressantes : 
 transform : translateY(-3px); (il est possible d’ajouter un effet de transition avec)
@@ -67,7 +67,7 @@ const hour = now.getHours();
 
 setInterval((fonction à appeler), (délai d’interval))
 Exemple : setInterval(setDate, 1000) ;
-03 – Playing with CSS variables and JS
+## 03 – Playing with CSS variables and JS
 HTML
 Tag Input : type : color → Fait apparaître une palette de couleurs
 CSS
@@ -86,7 +86,7 @@ document.documentElement.style.setProperty(`--${this.name}`, `${this.value}`)
 Cette fonction permet d’attribuer une valeur à une variable CSS sur l’ensemble du document.
 document.documentElement.style.setProperty(`filter`, `blur(5px)`) 
 Ici l’ensemble de la plage sera flouttée.
-05 – Flex panels image gallery
+## 05 – Flex panels image gallery
 HTML
 CSS
 Propriétés intéressantes : 
@@ -108,7 +108,7 @@ this.classList.toggle("active");
 }
 
 
-06 – Search function
+## 06 – Search function
 HTML
 CSS
 Propriétés intéressantes : 
@@ -122,7 +122,7 @@ fetch(endpoint)
 
 /!\ Un .innerHTMLdoit impérativement être rempli par un string
 
-0
+## 0
 HTML
 CSS
 Propriétés intéressantes : 

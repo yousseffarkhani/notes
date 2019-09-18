@@ -1,5 +1,6 @@
 Source : https://www.sohamkamani.com/blog/2017/01/16/web-security-essentials/
 Vidéos sur le sujet : https://www.youtube.com/watch?v=-enHfpHMBo4&list=PL96C35uN7xGLux5q2c4P_IqbKF11-pfsR
+également : https://www.calhoun.io/securing-cookies-in-go/
 
 # Introduction
 
