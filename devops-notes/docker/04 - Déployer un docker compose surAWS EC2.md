@@ -10,4 +10,4 @@
 7. Créer le .env avec
    POSTGRES_USER=postgres
    POSTGRES_PASSWORD=secret
-8. docker-compose up
+8. sudo docker-compose up
