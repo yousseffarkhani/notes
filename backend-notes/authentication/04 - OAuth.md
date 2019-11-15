@@ -1,4 +1,5 @@
 Source : https://www.sohamkamani.com/blog/golang/2018-06-24-oauth-with-golang/
+Plus d'informations : https://oauth.net/articles/authentication/
 
 # Introduction
 

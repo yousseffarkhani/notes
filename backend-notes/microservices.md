@@ -17,12 +17,14 @@ Cette indépendance entre chaque bloc est possible en se mettant d'accord sur un
 
 # Quand utiliser des microservices ou un monolithe ?
 
-Microservices :
+## Microservices :
 
 - De nombreuses personnes et équipes seront amenés à travailler sur le système (loosely coupled)
 - Besoin de scalibilité pour servir des millions d'utilisateurs en parrallèle
 - Besoin d'un système hautement disponible
-  Monolithique :
+
+## Monolithique :
+
 - Le système est développé par une personne
 - Pas besoin de scalabilité
 - Besoin d'une architecture simple

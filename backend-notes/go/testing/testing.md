@@ -19,6 +19,38 @@ En Go, il n'y a pas besoin de framework de test, tout est fourni directement.
 # Etapes de test
 
 1. Ecrire le test
+Pour définir le nom du test, utiliser la forme :
+
+`<ItemUnderTest> <expected behavior> <under what state or condition>`
+
+Utiliser des majuscules pour mettre en valeur ce qui est unique à propos du test.
+Exemple :
+```
+HandleCategory trims LEADING spaces from valid category
+HandleCategory trims TRAILING spaces from valid category
+HandleCategory trims LEADING and TRAILING spaces from valid category
+```
+
+Définir ensuite le test sous la forme Arrange-Act-Assert :
+```go
+t.Run("Schedules alert on game start for 5 players", func(t *testing.T) {
+// Arrange
+		blindAlerter := &SpyBlindAlerter{}
+		game := poker.NewTexasHoldem(dummyPlayerStore, blindAlerter)
+
+// Act
+		game.Start(5)
+
+// Assert
+		cases := []scheduledAlert{
+			{0 * time.Second, 100},
+			{10 * time.Minute, 200},
+			{20 * time.Minute, 300},
+			{30 * time.Minute, 400},
+		}
+		checkSchedulingCases(t, cases, blindAlerter)
+	})
+```
 2. Faire en sorte que le programme compile
 3. lancer le test et voir si ça fail bien. Vérifier que la description du texte explique de manière simple le problème. Se poser la question que vérifie mon test ?
 4. Ecrire le minimum de code pour passer le test

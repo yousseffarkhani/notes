@@ -45,7 +45,9 @@ Afin de répondre à ces 2 enjeux, il existe respectivement 2 mécanismes :
     sudo apt-get install certbot
     sudo certbot certonly --standalone
 ```
-3. Utiliser les certificats dans l'application
+3. Utiliser les certificats dans l'application.
+Pour les copier dans le répertoire projet, utiliser la commande :
+`cp /etc/letsencrypt/live/playground.yousseffarkhani.website/* .TLS/`
 ```go
 http.ListenAndServeTLS(":443", "fullchain.pem", "privkey.pem", server)
 ```

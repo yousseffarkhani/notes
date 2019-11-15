@@ -1,8 +1,33 @@
+https://www.calhoun.io/interfaces-define-requirements/
 # Introduction
 
 Une interface est un type définissant une liste de méthodes.
 **Lorsque qu'un type définit toutes les méthodes de la liste on dit que le type implémente l'interface.**
 L'interface spécifie les méthodes que doivent contenir les types et les types décident de l'implémentation de ces méthodes.
+
+
+# Static type vs dynamic type
+Les variables déclarées avec une interface disposent de 2 types. Un type statique représentant l'interface utilisée et un type dynamique représentant le type de la variable (struct).
+
+```go
+type I interface {
+M()
+}
+
+type T1 struct {}
+
+func (t T1) M() {}
+
+type T2 struct {}
+
+func (t T2) M() {}
+
+var i I = T1{} // Dynamic type : T1
+i = T2{} // Dynamic type : T2
+```
+
+Ici le type statique est I. Celui-ci ne changera jamais.
+Le type dynamique quand à lui peut évoluer au cours du programme.
 
 # Déclarer et implémenter une interface
 
