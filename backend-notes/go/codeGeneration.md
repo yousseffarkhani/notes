@@ -1,0 +1,1 @@
+https://www.calhoun.io/using-code-generation-to-survive-without-generics-in-go/

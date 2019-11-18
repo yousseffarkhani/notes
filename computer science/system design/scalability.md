@@ -39,7 +39,10 @@ Consiste à stocker en RAM les données qui seront surement réutilisés.
 Cela permet d'avoir accès rapidement à la donnée.
 Ex : Memcached, Redis
 Le cache est souvent utilisé pour éviter d'avoir à appeler une BDD.
-Ce système est souvent utilisé pour garder les sessions utilisateurs.
+Ce système est souvent utilisé pour :
+- garder les sessions utilisateurs
+- garder en mémoire les fils d'actualité des utilisateurs récents
+
 Il existe 2 patterns de caching :
 - Cached database queries : Consiste à mettre en cache le résultat de la query avec pour clé une version hashé de la query.
 - Cached Objects
@@ -58,8 +61,23 @@ Exemples :
 
 # Database
 ## SQL vs NoSQL
+https://www.sitepoint.com/sql-vs-nosql-differences/
+
+### SQL
+Relationnal data
+Structured Data
++ :
+- Transactions
+- Lookups by index very fast
+- JOINs
+- Adding a new table of information
+### NoSQL
+Dynamic data
+Non-relationnal data
+Store a lot of TB
 Pas de requêtes joint
 Les joint doivent être réalisés dans le code.
++ : Scaling
 ## Sharding
 TODO : http://highscalability.com/blog/2009/8/6/an-unorthodox-approach-to-database-design-the-coming-of-the.html
 ## Index
