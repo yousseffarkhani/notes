@@ -8,7 +8,7 @@ Un tree est un graphe spécifique disposant de propriétés particulières :
 # Générer un arbre à partir d'un fichier
 Fichier d'entrée (dfs.in):
 ```bash
- 5 # Nombre de nodes
+5 # Nombre de nodes
 1 -1 -1 # index 0
 # 1 : Valeur, -1 (pas de node): index du node à gauche, index du node à droite : -1
 3 -1 -1 # index 1
@@ -42,3 +42,5 @@ func read() []Node {
 	return nodes
 }
 ```
+
+Pour lancer ce programme : `go run main.go < dfs.in`

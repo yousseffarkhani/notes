@@ -7,6 +7,7 @@ On peut également fixer une capacité maximum à une queue.
 
 Nous allons ici utiliser un slice car c'est plus simple (même s'il ne s'agit pas de l'option la plus optimal).
 # Avantages
+- Opérations rapides (Enqueue, Dequeue, peek prennent O(1))
 # Inconvénients
 # Complexité
 # Pré-requis
