@@ -3,7 +3,13 @@ title: React
 created: '2019-04-03T13:32:48.800Z'
 modified: '2019-04-03T13:33:00.310Z'
 ---
-
+# How react works under the hood (https://www.youtube.com/watch?v=TjnyFNxQ67Y&feature=emb_title)
+Webpack : Bundles all the file into a few files
+Webpack dev server : Holds files in memory and serves them to the browser
+JSX : Permet de mettre du HTML dans JS. Babel transforme ce code en JS
+Babel : Converti en JS de dernière génération. Du JSX vers du JS. Il suffit de créer un preset pour créer un convertisseur
+Start : charge l'appli en RAM (écrit en NodeJS)
+Build : crée un fichier static
 # React
 https://reactjs.org/docs/thinking-in-react.html
 Finir ce projet !!

@@ -25,3 +25,8 @@ Pour se connecter au container et se logger à la BDD :
 # RDS
 - Tester la connexion : `telnet database-1.dzdzxsxs.eu-west-3.rds.amazonaws.com 5432`
 - Se connecter depuis bash : `psql --host=database-1.cgv4qujjbtwe.eu-west-3.rds.amazonaws.com --port=5432 --username=postgres --password`
+
+# Mac
+brew services start postgresql
+brew services stop postgresql
+brew services restart postgresql
