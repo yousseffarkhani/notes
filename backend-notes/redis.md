@@ -6,3 +6,6 @@ De plus Redis offre la possibilité de mettre une date d'expiration sur les donn
 Cependant Redis ne dispose pas des fonctionnalités d'une BDD SQL (relationships, complex queries, ...).
 
 Quand des requêtes sont communes et nombreuses, il est possible de stocker le résultat dans Redis sous forme JSON.
+
+# Redis CLI
+https://redis.io/commands

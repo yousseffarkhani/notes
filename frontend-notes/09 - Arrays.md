@@ -96,7 +96,7 @@ La fonction callback dispose de 4 éléments en entrée : l’accumulateur (la 
 La valeur initiale est utilisé comme 1er argument lors du 1er appel de la fonction callback
 
 Exemple 1 – Somme d’un tableau d’objets :
-```
+```JS
 var valeurInitiale = 0;
 var somme = [{x: 1}, {x:2}, {x:3}].reduce(
     (accumulateur, valeurCourante) => accumulateur + valeurCourante.x

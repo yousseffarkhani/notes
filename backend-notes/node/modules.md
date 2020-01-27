@@ -43,8 +43,11 @@ fs.readFile("readme.txt", "utf8", (err, data) => { //Binary data, character enco
 
 # Streams and buffers
 Buffer : Espace de stockage temporaire pour un morceau de données. Cela permet de transférer des gros volumes de données petit à petit
-Stream : 
-DUplex : Peut lire et écrire dans un stream
+Types de Stream : 
+- Writable
+- Readable (events: data, end, error, finish)
+- Duplex : Peut lire et écrire dans un stream
+- Transform : Il s'agit d'un duplex transformant la donnée
 Readable stream
 ```JS
 const myReadStream = fs.createReadStream(__dirname + "/readme.txt");
@@ -61,3 +64,10 @@ Pipes
 myReadStream.pipe(myWriteStream);
 
 ```
+
+
+this._source.resume(); // Resume emitting 'data' events
+    // resume peut être utilisé pour consommer toute la donnée d'un stream sans avoir besoin de processer la data avec un event listener sur l'event "data"
+
+
+    readStream.pause(); // Stream stops emitting "data" events. Data remains in the internal buffer.

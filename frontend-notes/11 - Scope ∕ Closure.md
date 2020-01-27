@@ -6,6 +6,7 @@ tags: [JS]
 ---
 
 # 11 - Scope / Closure
+https://www.freecodecamp.org/news/this-is-why-we-need-to-bind-event-handlers-in-class-components-in-react-f7ea1a6f93eb/
 ## Contexte / This : 
 Le mot `this` permet de réutiliser une fonction avec différents contextes (quel objet sera focus).
 `this` est régie par 4 règles :

@@ -25,12 +25,13 @@ Le problème des callbacks est qu’elles ne sont pas adaptées à l’enchainem
 Le problème avec les callback est qu’on prend l’hypothèse que le programme prenant en entrée la callback invoquera celle-ci au bon moment et de la bonne manière (la callback n’est appelé qu’une seule fois). Cela pose le problème d'inversion de contrôle.
 Pour régler ce problème, les promises ont été créees
 ## Promises
+https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261
 (Analogie du restaurant et du bipper)
-Les promises contrairement au callbacks permettent de reprendre le contrôle. En effet, les promises permettent de récupérer directement la donnée et l’envoyer aux fonctions que l’on souhaite (au lieu de devoir faire confiance à l’API).
+Les promises contrairement aux callbacks permettent de reprendre le contrôle. En effet, les promises permettent de récupérer directement la donnée et l’envoyer aux fonctions que l’on souhaite (au lieu de devoir faire confiance à l’API).
 Une promise a 3 états : pending, resolved et rejected (et settled). La promise ne peut pas revenir en arrière dans ses états. Ces états indiquent l’état de la requête.
 ### Déclarer une promise
 Pour déclarer une promise, il faut utiliser le format suivant :
-```
+```JS
 const promise = new Promise(function(resolve, reject){
   resolve(DONNEE);
   reject(RAISON);
@@ -41,7 +42,7 @@ Pour exploiter le retour de la promise, il faut utiliser .then et .catch (pour l
 ### Fonctions utiles
 Créer une promise anonyme à l’aide du constructeur: `new Promise((resolve, reject) => {... })`
 Renvoyer rapidement une promise sans la créer au préalable (utile dans ce cas car on attend une promise en sortie pour l’exploiter) : 
-```
+```JS
 var userCache = {};
 
 function getUserDetail(username) {
@@ -61,7 +62,7 @@ function getUserDetail(username) {
 }
 ```
 Lorsque les promises sont chainées alors la valeur de retour est utilisée :
-```
+```JS
 new Promise(function(resolve, reject) { 
   // A mock async action using setTimeout
   setTimeout(function() { resolve(10); }, 3000);
@@ -93,7 +94,7 @@ Lancer plusieurs requêtes à la fois et récupérer le résultat de la 1ere pro
 Il existe une autre façon de travailler avec des fonctions asynchrones : async/await.
 ### Comment déclarer une async function ?
 Il faut placer le mot async avant la function :
-```
+```JS
 async function f(){
   return 1;
 }
@@ -101,7 +102,7 @@ async function f(){
 Le mot async permet de déclarer qu’une fonction va retourner une promise. Même si la fonction retourne une valeur (voir exemple ci-dessus), la valeur sera enveloppée dans une promise.
 Si la fonction throw une erreur alors la promise sera rejected.
 ### Await
-Le mot await permet de faire en sorte que l’interpréteur attende le retour de la promise et retourne l résultat :
+Le mot await permet de faire en sorte que l’interpréteur attende le retour de la promise et retourne le résultat :
 `let value = await promise;`
 La fonction se met en pause au moment de await et continue quand la promise est résolue.
 /!\ Le mot await ne peut être utilisée que dans une async function.
