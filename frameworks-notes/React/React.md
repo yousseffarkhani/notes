@@ -69,7 +69,7 @@ function Square(props) {
     return (
         <button 
             className="square" 
-            onClick={()=>{props.onClick()}} // React automatically updates the child components when calling setState
+            onClick={()=>{props.onClick()}}
             >
                 {props.value}
             </button>
@@ -89,11 +89,13 @@ class Square extends React.Component { // Controlled Component because it receiv
 }
 ```
 ### class components :
+```JS
 class Welcome extends React.Component {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
   }
 }
+```
 /!\Les components doivent démarrés avec une lettre en majuscule (c’est comme ça que react identifie qu’il s’agit d’un component).
 Les props sont transmises comme des objets :
 ```JS
@@ -133,13 +135,17 @@ Pour modifier un state, il faut utiliser la méthode this.setState({date: new Da
 A chaque fin d’appel à this.setState la méthode render() est invoquée.
 /!\ L’unique endroit où utiliser this.state est dans le constructeur.
 Pour modifier la valeur d’un state, il ne faut absolument pas utiliser this.props / this.state car les MAJ peuvent être asynchrones entrainant des comportements non souhaités.
+```JS
 this.setState({
   counter: this.state.counter + this.props.increment, // A ne pas faire
 });
+```
 Pour réaliser ce genre de choses, il faut utiliser une 2ème forme de setState() acceptant une fonction au lieu d’un objet. Cette fonction recevra le state en 1er argument et les props en 2ème argument : 
+```JS
 this.setState((state, props) => ({
   counter: state.counter + props.increment
 }));
+```
 React met automatiquement à jour les child components lorsque setState est appelé.
 
 ## Lifecycle methods

@@ -1,3 +1,34 @@
+# Redux hooks
+https://medium.com/swlh/clean-up-redux-code-with-react-redux-hooks-71587cfcf87a
+
+# Actions
+Les actions correspondent à des instructions envoyées au store.
+Signature d'une action 
+```TS
+interface Action {
+  type: string;
+  payload?: any;
+}
+```
+
+# Reducers
+Un reducer est une fonction pure prenant le state de l'application (le store) et l'action à dispatcher.
+```TS
+function reducer(state = {}, action) {
+  switch (action.type) {
+    case 'ADD_TODO': {
+      return {
+        ...state,
+        // we spread the existing todos array into a new array
+        // and then add our new todo on the end
+        todos: [...state.todos, { label: 'Eat pizza,', complete: false }],
+      };
+    }
+  }
+
+  return state;
+}
+```
 # Description
 Redux est une base de données centrale pour notre application.
 Tous les composants peuvent accéder aux données de ce store.

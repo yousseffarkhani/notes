@@ -52,4 +52,10 @@ useEffect(() => {
         return () => clearInterval(intervalId) // Use effect keeps this function and triggers it when component is unmounted
     }, [])
 ```
+# useRef
+Permet de cibler un node du DOM. 
 
+# useLayoutEffect
+Ce hook est déclenché une fois que tous les changements du DOM ont eu lieu.
+Ce hook est à utiliser en dernier recours après useEffect.
+Pemret de mesurer par exemple la taille d'un élément du DOM.

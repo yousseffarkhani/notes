@@ -42,3 +42,7 @@ queryInterface.createTable('Episodes', {
     }
 })
 ```
+
+# Associations
+# Options
+required: si cette valeur est à true, alors toutes les données
