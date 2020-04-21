@@ -38,3 +38,12 @@ https://cloud.google.com/pubsub/docs/overview?hl=fr
 Cloud composer est une solution basée sur Apache airflow.
 Ce service permet de créer, planifier et de surveiller les pipelines dans plusieurs clouds.
 Cloud composer dispose de connecteurs avec BigQuery, DataFlow, dataProc, Datastore, storage, Pub/Sub.
+
+# Définitions
+Serverless: Le provider gère les tâches de management d'infrastructure à notre place
+Exemples de tâches:
+- Resource Provisioning
+- Scaling
+- Reliability
+- Déploiemet & configuration
+- Monitoring
