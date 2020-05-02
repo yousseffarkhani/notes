@@ -19,7 +19,7 @@
     - Difficile à maintenir
 ## Couches d'abstraction
 1. Machine instructions
-2. Computer languages: Permet aux humains d'itneragir avec le système
+2. Computer languages: Permet aux humains d'interagir avec le système
 3. Language primitives: string, integer, pointer, ...
 4. Concepts de Code utilisés pour réaliser une application
 ## Types d'abstraction
