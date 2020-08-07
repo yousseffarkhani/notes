@@ -1,3 +1,6 @@
+
+# Source
+https://khalilstemmler.com/articles/enterprise-typescript-nodejs/clean-nodejs-architecture/
 # OOP Principles
 5 principes, appelés SOLID Design principles, régissent la programmation orientée objet :
 ## Single responsibility
@@ -217,7 +220,7 @@ Using this principle a square is not a child of rectangle
 ## Comment détecter une violation ?
 ### Type checking with `is` or `as` in polymorphic code
 ```JS
-// employees est un table d'Employee
+// employees est une table d'Employee
 employees.forEach(employee => {
     if (typeof employee === Manager){
         Helpers.PrintManager(employee as Manager)
@@ -310,7 +313,7 @@ Les 2 devraient communiquer à travers une interface (abstraction)
 bad/good abstraction
 ```JS
 interface IOrderDataAccess {
-    ListOrders(params: SqlParameterCollection): SqlDataReader // Mauavaise abstraction car on a la manière dont est stockée la donnée
+    ListOrders(params: SqlParameterCollection): SqlDataReader // Mauvaise abstraction car on a la manière dont est stockée la donnée
     // Expose implementation details
 }
 
@@ -325,12 +328,12 @@ Les interfaces permettent d'inverser les dépendances ainsi la classe A ne dépe
 <img src="./img/abstractions2.png" alt="drawing" style="width:400px;"/>
 
 ## Low level dependencies examples
-Database
-File system
-Email 
-Web API consumption
-Configuration details
-system clock
+- Database
+- File system
+- Email 
+- Web API consumption
+- Configuration details
+- system clock
 
 ## Hidden dependencies
 Attention à ne pas utiliser directement ces low levels dependencies dans les high level dependencies

@@ -19,15 +19,10 @@ Il faut que les classes soient logiques (ie order has many order item)
 - Considérer les évolutions futures (changement de prix, d'adresse, ...)
 - Définir l'abstraction appropriée (Joe et sa famille) en ne gardant que les informations utiles au programme.
 
-Application layer (UI, Business logic, Data access layer, common code (logging, emailing, ...))
-Business logic
-Propriétés
-Getters / Setters sur les propriétés (sauf si read ou write only)
+Définir les Getters / Setters sur les propriétés (sauf si read ou write only)
+
 
 Les méthodes statiques peuvent être utilisés pour traquer des informations globales (nombre de fois où l'instance a été crée) 
-
-Méthodes
-Les méthodes sont les fonctions exercant la business logic
 
 Ne pas oublier l'overloading (consiste à avoir le même nom pour les méthodes mais avec des signatures différentes)
 Ex: Retrieve() => Renvoie une liste, Retrieve(int customerId) => Renvoie un customer

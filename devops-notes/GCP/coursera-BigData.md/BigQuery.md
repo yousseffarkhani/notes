@@ -10,7 +10,16 @@ Bulk data and streaming data ingestion
 - Query
 Can query CSV files hosted on Cloud storage / Google sheets aswell
 Query more efficient when data is stored in Big Query storage 
-
+# Big Query Engine
+Service d'analyse en mémoire rapide/ 
+Cela permet d'analyser les données stockées dans BigQUery avec un temps de réponse aux requêtes inférieur à 1 seconde et une simultanéité élevée.
+# Big Query slot
+Il s'agit d'une unité de capacité de calcul nécessaire pour exécuter des requêtes SQL.
+BQ calcule automatiquement le nombre de slots requis en fonction de la taille et de la complexxité de la requête.
+# In-memory query execution
+https://cloud.google.com/blog/products/gcp/in-memory-query-execution-in-google-bigquery
+# Optimize Big Query
+https://medium.com/zalora-data/optimising-queries-in-bigquery-for-beginners-971be491f1de
 # Tips
 Créer une table avec le résultat d'une query:
 ```SQL

@@ -1,5 +1,9 @@
-Proven solutions to common programming problems.
+# Source
+https://www.dofactory.com/javascript/design-patterns
+https://addyosmani.com/resources/essentialjsdesignpatterns/book/#designpatternstructure
+https://refactoring.guru/design-patterns/typescript
 # Introduction
+Proven solutions to common programming problems.
 ## Définition
 Un design pattern décrit la solution de manière générale à une problématique récurrente.
 Il existe plusieurs manières d'utiliser un design pattern car il ne s'agit que d'une guideline. 
